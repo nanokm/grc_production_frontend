@@ -1,66 +1,171 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
 
-export default function Home() {
+import { Box, Container, Heading, Text, VStack, HStack, Card, SimpleGrid, Input, Button, Field } from "@chakra-ui/react"
+import { Topbar } from "@/components/layout/topbar"
+
+/**
+ * Main dashboard page component.
+ * Displays the topbar and mock content.
+ */
+const HomePage = (): React.ReactElement => {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    <Box minH="100vh" bg="bg.subtle">
+      <Topbar />
+
+      <Container maxW="container.xl" py="8">
+        <VStack gap="8" align="stretch">
+          {/* Page Header */}
+          <Box>
+            <Heading size="lg" mb="2">
+              Welcome to GRC Platform
+            </Heading>
+            <Text color="fg.muted">
+              Manage governance, risk, and compliance in one place.
+            </Text>
+          </Box>
+
+          {/* Stats Cards */}
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap="4">
+            <Card.Root>
+              <Card.Body>
+                <VStack align="flex-start" gap="1">
+                  <Text fontSize="sm" color="fg.muted">
+                    Total Risks
+                  </Text>
+                  <Heading size="2xl">42</Heading>
+                  <Text fontSize="sm" color="green.500">
+                    +12% from last month
+                  </Text>
+                </VStack>
+              </Card.Body>
+            </Card.Root>
+
+            <Card.Root>
+              <Card.Body>
+                <VStack align="flex-start" gap="1">
+                  <Text fontSize="sm" color="fg.muted">
+                    Active Controls
+                  </Text>
+                  <Heading size="2xl">156</Heading>
+                  <Text fontSize="sm" color="green.500">
+                    +5% from last month
+                  </Text>
+                </VStack>
+              </Card.Body>
+            </Card.Root>
+
+            <Card.Root>
+              <Card.Body>
+                <VStack align="flex-start" gap="1">
+                  <Text fontSize="sm" color="fg.muted">
+                    Compliance Score
+                  </Text>
+                  <Heading size="2xl">87%</Heading>
+                  <Text fontSize="sm" color="green.500">
+                    +3% from last month
+                  </Text>
+                </VStack>
+              </Card.Body>
+            </Card.Root>
+
+            <Card.Root>
+              <Card.Body>
+                <VStack align="flex-start" gap="1">
+                  <Text fontSize="sm" color="fg.muted">
+                    Open Issues
+                  </Text>
+                  <Heading size="2xl">8</Heading>
+                  <Text fontSize="sm" color="red.500">
+                    -2 from last month
+                  </Text>
+                </VStack>
+              </Card.Body>
+            </Card.Root>
+          </SimpleGrid>
+
+          {/* Mock Form Section */}
+          <Card.Root>
+            <Card.Header>
+              <Heading size="md">Quick Risk Assessment</Heading>
+            </Card.Header>
+            <Card.Body>
+              <VStack gap="4" align="stretch" maxW="md">
+                <Field.Root>
+                  <Field.Label>Risk Title</Field.Label>
+                  <Input placeholder="Enter risk title" />
+                </Field.Root>
+
+                <Field.Root>
+                  <Field.Label>Description</Field.Label>
+                  <Input placeholder="Describe the risk" />
+                </Field.Root>
+
+                <Field.Root>
+                  <Field.Label>Impact Level</Field.Label>
+                  <Input placeholder="Low / Medium / High / Critical" />
+                </Field.Root>
+
+                <HStack gap="2" pt="2">
+                  <Button colorPalette="blue">Submit Assessment</Button>
+                  <Button variant="outline">Cancel</Button>
+                </HStack>
+              </VStack>
+            </Card.Body>
+          </Card.Root>
+
+          {/* Recent Activity */}
+          <Card.Root>
+            <Card.Header>
+              <Heading size="md">Recent Activity</Heading>
+            </Card.Header>
+            <Card.Body>
+              <VStack gap="4" align="stretch">
+                {[
+                  {
+                    action: "Risk assessment submitted",
+                    user: "John Doe",
+                    time: "2 hours ago",
+                  },
+                  {
+                    action: "Control updated",
+                    user: "Jane Smith",
+                    time: "4 hours ago",
+                  },
+                  {
+                    action: "Compliance report generated",
+                    user: "Mike Johnson",
+                    time: "6 hours ago",
+                  },
+                  {
+                    action: "New policy approved",
+                    user: "Sarah Williams",
+                    time: "1 day ago",
+                  },
+                ].map((activity, index) => (
+                  <HStack
+                    key={index}
+                    justify="space-between"
+                    py="2"
+                    borderBottomWidth={index < 3 ? "1px" : "0"}
+                  >
+                    <Box>
+                      <Text fontWeight="medium">{activity.action}</Text>
+                      <Text fontSize="sm" color="fg.muted">
+                        by {activity.user}
+                      </Text>
+                    </Box>
+                    <Text fontSize="sm" color="fg.muted">
+                      {activity.time}
+                    </Text>
+                  </HStack>
+                ))}
+              </VStack>
+            </Card.Body>
+          </Card.Root>
+        </VStack>
+      </Container>
+    </Box>
+  )
 }
+
+export default HomePage
