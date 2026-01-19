@@ -1,0 +1,69 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+.next
+out
+build
+dist
+
+# Development files
+.git
+.gitignore
+*.md
+!README.md
+
+# IDE and editor files
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Environment files (should be injected at runtime)
+.env
+.env.*
+!.env.example
+
+# Test files
+coverage
+.nyc_output
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__
+jest.config.js
+jest.setup.ts
+
+# Docker files (prevent recursive copying)
+Dockerfile*
+docker-compose*
+.docker
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug
+.npm
+.eslintcache
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Misc
+.claude
+*.local

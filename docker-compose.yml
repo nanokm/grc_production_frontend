@@ -1,0 +1,43 @@
+# Docker Compose for Development Environment
+# Usage: docker compose up --build
+
+name: grc-platform-dev
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: grc-frontend-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot reload
+      - .:/app
+      # Prevent overwriting node_modules in container
+      - /app/node_modules
+      # Persist Next.js cache for faster rebuilds
+      - nextjs-cache:/app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - WATCHPACK_POLLING=true
+    networks:
+      - grc-network
+    # Development healthcheck (more lenient)
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/login"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  nextjs-cache:
+    driver: local
+
+networks:
+  grc-network:
+    driver: bridge
